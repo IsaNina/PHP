@@ -8,12 +8,18 @@
 <style>
  #rec{
   color: pink;
+  font-family: cursive;
+  font-size: 3rem;
  }
  #aprovado{
   color: green;
+  font-family: cursive;
+  font-size: 3rem;
  }
  #reprovado{
   color: red;
+  font-family: cursive;
+  font-size: 3rem;
  }
 </style>
 
