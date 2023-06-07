@@ -2,9 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>CRUD - Controle de alunos</title>
 </head>
 <body>
 <a href="index.php">Home</a>
@@ -57,7 +55,7 @@
 
             echo "</table><br>";
 
-            echo "<button type='submit' formaction='remove.php'>Excluir Alunos</button>";
+            echo "<button type='submit' formaction='exclusao.php'>Excluir Alunos</button>";
             echo '   |   ';
             echo "<button type='submit' formaction='edicao.php'>Editar Alunos</button>";
             echo "</form>";
