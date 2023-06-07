@@ -35,35 +35,30 @@
             //buscando dados
             $stmt ->execute();
 
+            echo "<form method='post'>";
             echo "<table border='1px'>";
             echo "<tr>";
+            echo "<th></th>";
             echo "<th>RA:</th>";
             echo "<th>Nome:</th>";
             echo "<th>Curso:</th>";
-            echo "<th colspan=2></th>";
             echo "</tr>";
 
             while ($row = $stmt->fetch()){
                 echo "<tr>";
+                echo "<td><input type='radio' name='raAluno' value='" . $row['ra'] . "'>";
                 echo "<td>" . $row['ra'] . "</td>";
                 echo "<td>" . $row['nome'] . "</td>";
                 echo "<td>" . $row['curso'] . "</td>";
-
-                echo "<td>";
-                echo "<a href='exclusao.php?raAluno=";
-                echo $row['ra'];
-                echo "'><img src='excluir.png' width='16px'></a></td>";
-
-                echo "<td>";
-                echo "<a href='edicao.php?raAluno=";
-                echo $row['ra'];
-                echo "'><img src='edicao.png' width='16px'></a></td>";
-                
                 echo "</tr>";
             }
 
             echo "</table><br>";
 
+            echo "<button type='submit' formaction='exclusao.php'>Excluir Alunos</button>";
+            echo '   |   ';
+            echo "<button type='submit' formaction='edicao.php'>Editar Alunos</button>";
+            echo "</form>";
 
         } catch (PDOException $e) {
             echo 'Error:' . $e->getMessage();

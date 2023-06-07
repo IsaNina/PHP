@@ -10,16 +10,16 @@
     <hr>
     <h2>Edição Alunos</h2>  
 
-
 </body>
 </html>
 
 <?php
 
-    if (!isset($_POST["raAluno"])) {
+    //if (!isset($_POST["raAluno"])) {
+    if (!isset($_GET["raAluno"])) {
         echo"Selecione o aluno a ser editado!";
     } else {
-        $ra = $_POST["raAluno"];
+        $ra = $_GET["raAluno"];
         
         try {
             include("conexaoBD.php");

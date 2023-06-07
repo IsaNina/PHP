@@ -14,21 +14,24 @@
 
 <?php
 
-    if (!isset($_POST["raAluno"])) {
+    include("conexaoBD.php");
+
+    //if (!isset($_POST["raAluno"])) {
+    if (!isset($_GET["raAluno"])) {
         echo"Selecione o aluno a ser excluido!";
     } else {
-        $ra = $_POST["raAluno"];
+        $ra = $_GET["raAluno"];
         try {
         include("conexaoBD.php");
         $stmt= $pdo->prepare('DELETE FROM alunos WHERE ra = :ra');
         $stmt->bindParam(':ra',$ra);
         $stmt->execute();
-        echo $stmt->rowCount(). "aluno de RA $ra foi removido!";
+        echo $stmt->rowCount() . " aluno de RA $ra foi removido!";
         
         } catch(PDOException $e) {
             echo 'Error: ' . $e->getMessage();
-
         }
+
         $pdo = null;
     }
 ?>
