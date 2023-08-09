@@ -26,7 +26,7 @@
           <input type="button" value="Cadastrar"
                  onclick="window.open('cadastra.php', '_top');"><br><br>
           <input type="button" value="Consultar"
-                 onclick="window.open('consulta.php', '_top');">
+                 onclick="window.open('consultaRadiobutton.php', '_top');">
       </form>
   </div>
 

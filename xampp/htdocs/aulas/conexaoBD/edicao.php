@@ -50,6 +50,8 @@
                 } elseif ($row['curso'] == "Qualidade") {
                     $qualidade = "selected";
                 }
+
+                $foto = $row['foto'];
                 
                 echo "<form method= 'post' action='altera.php'>\n";
                 echo "RA:<br>\n";
@@ -65,6 +67,16 @@
                         <option value='Mecânica' $mecanica >Mecânica</option>\n
                         <option value='Qualidade' $qualidade >Qualidade</option>\n
                     </select><br><br>\n";
+                echo "Foto:<br>";
+
+                if ($foto==""){
+                    echo "<img src='user.jpg' width='100px' height='100px'>";
+                } else {
+                    echo "<img src='data:image;base64,".base64_encode($row["foto"])."' width='100px' height='100px'>";
+                }
+
+                echo "<input type='file' name='foto'><br> <br>";
+
                 echo "<input type='submit' value'Salvar Alterações>\n";
                 echo "<hr>\n";
                 echo "</form>";

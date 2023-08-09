@@ -31,7 +31,7 @@
 
 <h2>Cadastro de Alunos</h2>
 <div>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
 
         RA:<br>
         <input type="text" size="10" name="ra"><br><br>
@@ -50,6 +50,9 @@
             <option value="Qualidade">Qualidade</option>
         </select><br><br>
 
+        Foto: <br>
+        <input type="file" name="foto" accept="image/gif, image/png, image/jpg, image/jpeg"><br><br>
+
         <input type="submit" value="Cadastrar">
         <hr>
     </form>
@@ -60,6 +63,8 @@
 
 <?php
 
+    define('TamanhoMax', (2 * 1024 * 1024));
+
     if ($_SERVER["REQUEST_METHOD"] === 'POST') {
 
         try {
@@ -67,9 +72,22 @@
             $nome = $_POST["nome"];
             $curso = $_POST["curso"];
 
+            //foto
+            $foto = $_FILES['foto'];
+            $nomeFoto = $foto['name'];
+            $tipoFoto = $foto['type'];
+            $tamanhoFoto = $foto['size'];
+
             if((trim($ra) == "") || (trim($nome) == "")){
                 echo "<span id='error'>RA e nome são obrigatórios!</span>";
-            } else {
+            //validação tipo de arquivo
+            } else if (($nomeFoto != "") && (!preg_match('/^image\/(jpeg|png|gif)$/', $tipoFoto)) ) {
+                echo "<span id='error'>Imagem inválida</span>";
+            } //validação tamanho e arquivo
+            else if (($nomeFoto != "")  &&  (!preg_match('/^image\/(jpg|jpeg|png|gif)$/', $tipoFoto))) {
+                echo "<span id='error'>Imagem maior que 2mb</span>";
+            }
+            else {
                 include("conexaoBD.php");
                 //verifica se o RA iformado já existe no BD para ñ dar exception
                 $stmt = $pdo->prepare("select * from alunos where ra = :ra");
@@ -78,11 +96,19 @@
 
                 $rows = $stmt->rowCount();
 
-                if ($rows <= 0){
-                    $stmt = $pdo->prepare("insert into alunos (ra, nome, curso) values(:ra, :nome, :curso)");
+                if ($rows <= 0) {
+
+                    if($nomeFoto == ""){
+                        $fotoBinario = null;
+                    } else {
+                        $fotoBinario = file_get_contents($foto['tmp_name']);
+                    }
+
+                    $stmt = $pdo->prepare("insert into alunos (ra, nome, curso, foto) values(:ra, :nome, :curso, :foto)");
                     $stmt->bindParam(':ra', $ra);
                     $stmt->bindParam(':nome', $nome);
                     $stmt->bindParam(':curso', $curso);
+                    $stmt->bindParam(':foto', $fotoBinario);
                     $stmt->execute();
 
                     echo "<span id='sucess'>Aluno Cadastrado!</span>";

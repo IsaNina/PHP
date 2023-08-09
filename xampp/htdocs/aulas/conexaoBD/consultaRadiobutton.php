@@ -42,6 +42,7 @@
             echo "<th>RA:</th>";
             echo "<th>Nome:</th>";
             echo "<th>Curso:</th>";
+            echo "<th>Foto:</th>";
             echo "</tr>";
 
             while ($row = $stmt->fetch()){
@@ -50,6 +51,11 @@
                 echo "<td>" . $row['ra'] . "</td>";
                 echo "<td>" . $row['nome'] . "</td>";
                 echo "<td>" . $row['curso'] . "</td>";
+                if($row["foto"] == null){
+                    echo "<td align='center'><img src='user.jpg' width='100px' height='100px'></td>";
+                } else {
+                    echo "<td align='center'><img src='data:image;base64,".base64_encode($row["foto"])."' width='100px' height='100px'> </td>";
+                }
                 echo "</tr>";
             }
 
