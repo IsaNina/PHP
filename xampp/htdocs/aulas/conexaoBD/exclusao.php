@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <a href="index.php">Home</a> | <a href="consulta.php">Consulta</a>
+    <a href="index.php">Home</a> | <a href="consultaRadiobutton.php">Consulta</a>
     <hr>
     <h2>Exclusão Alunos</h2>  
 </body>

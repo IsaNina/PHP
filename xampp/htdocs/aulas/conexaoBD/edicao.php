@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <a href="index.php">Home</a> | <a href="consulta.php">Consulta</a>
+    <a href="index.php">Home</a> | <a href="consultaRadiobutton.php">Consulta</a>
     <hr>
     <h2>Edição Alunos</h2>  
 
@@ -16,10 +16,10 @@
 <?php
 
     //if (!isset($_POST["raAluno"])) {
-    if (!isset($_GET["raAluno"])) {
+    if (!isset($_POST["raAluno"])) {
         echo"Selecione o aluno a ser editado!";
     } else {
-        $ra = $_GET["raAluno"];
+        $ra = $_POST["raAluno"];
         
         try {
             include("conexaoBD.php");
@@ -53,7 +53,7 @@
 
                 $foto = $row['foto'];
                 
-                echo "<form method= 'post' action='altera.php'>\n";
+                echo "<form method= 'post' action='altera.php'  enctype='multipart/form-data'>\n";
                 echo "RA:<br>\n";
                 echo "<input type='text' size='10' name='ra' value='$row[ra]' readonly><br><br>\n";
                 echo "Nome:<br>\n";
